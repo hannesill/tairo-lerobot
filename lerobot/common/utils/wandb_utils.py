@@ -69,6 +69,12 @@ class WandBLogger:
         os.environ["WANDB_SILENT"] = "True"
         import wandb
 
+        # Ensure the directory exists
+        os.makedirs(self.log_dir, exist_ok=True)
+
+        # Set WANDB_DIR environment variable
+        os.environ["WANDB_DIR"] = str(self.log_dir)
+
         wandb_run_id = (
             cfg.wandb.run_id
             if cfg.wandb.run_id
